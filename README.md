@@ -16,6 +16,14 @@ docker run -d --restart=unless-stopped \
 ```
 
 ---
+Watchdog
+---
+Add the following crontab:
+```sh
+*/30 * * * * docker run <CONTAINER_NAME> checkdaemon
+```
+
+---
 Uninstall
 ---
 ```sh
