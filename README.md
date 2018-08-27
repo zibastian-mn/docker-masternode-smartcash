@@ -10,8 +10,9 @@ Starting a node
 ---
 ```sh
 docker run -d --restart=unless-stopped \
-               -e node_key=<PrivateKey>
-               -v smartnode:/opt/etho -p 9678:9678 \
+               -e node_key=<PrivateKey> \
+               -e external_ip=<A.B.C.D> \
+               -v smartnode:/opt/smartcash -p 9678:9678 \
                zibastian/masternode-smartcash
 ```
 
