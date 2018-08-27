@@ -40,7 +40,7 @@ docker logs -f <CONTAINER_NAME> [--tail 20]
 ---
 Donation
 ---
-If this image helps you reduce time to deploy, I like beer :)
+If this image helps you reduce time to deploy, I like beer :) 
 
 **SMART:** SVu4CZ8ufyv8zovqZe418mWUcjefJzpzVi  
 **EGEM:** 0x720752E61664a1B81B2ec9F7E709D0bCDB55502f  
