@@ -1,10 +1,6 @@
 FROM alpine:latest as berkeleydb
 
-RUN apk --no-cache add autoconf
-RUN apk --no-cache add automake
-RUN apk --no-cache add build-base
-RUN apk --no-cache add libressl
-
+RUN apk --no-cache add autoconf automake build-base libressl
 
 ENV BERKELEYDB_VERSION=db-4.8.30.NC
 ENV BERKELEYDB_PREFIX=/opt/${BERKELEYDB_VERSION}
@@ -24,15 +20,11 @@ RUN rm -rf ${BERKELEYDB_PREFIX}/docs
 
 
 FROM alpine:latest as smartnode
-RUN apk --no-cache add wget git g++ make autoconf alpine-sdk automake libtool db-dev
+RUN apk --no-cache add wget git g++ make autoconf alpine-sdk automake libtool db-dev boost-dev libressl libressl-dev libevent-dev
 COPY --from=berkeleydb /opt /opt
 WORKDIR /opt/Core-Smart
 RUN git clone https://github.com/SmartCash/Core-Smart.git .
 RUN ./autogen.sh
-RUN apk --no-cache add boost-dev
-RUN apk --no-cache add libressl
-RUN apk --no-cache add libressl-dev
-RUN apk --no-cache add libevent-dev
 RUN ./configure --enable-cxx --disable-shared --with-pic LDFLAGS=-L`ls -d /opt/db*`/lib/ CPPFLAGS=-I`ls -d /opt/db*`/include/
 RUN make -j4
 RUN make install
