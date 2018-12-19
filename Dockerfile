@@ -23,7 +23,8 @@ FROM alpine:latest as smartnode
 RUN apk --no-cache add wget git g++ make autoconf alpine-sdk automake libtool db-dev boost-dev libressl libressl-dev libevent-dev
 COPY --from=berkeleydb /opt /opt
 WORKDIR /opt/Core-Smart
-RUN git clone https://github.com/SmartCash/Core-Smart.git .
+#RUN git clone https://github.com/SmartCash/Core-Smart.git .
+RUN wget https://github.com/SmartCash/Core-Smart/archive/v1.2.6.tar.gz && tar xfvz *.tar.gz --strip-components=1
 RUN ./autogen.sh
 RUN ./configure --enable-cxx --disable-shared --with-pic LDFLAGS=-L`ls -d /opt/db*`/lib/ CPPFLAGS=-I`ls -d /opt/db*`/include/
 RUN make -j4
