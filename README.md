@@ -10,9 +10,18 @@ Starting a node
 ---
 ```sh
 docker run -d --restart=unless-stopped \
-               -e node_key=<PrivateKey>
-               -v smartnode:/opt/etho -p 9678:9678 \
+               -e node_key=<PrivateKey> \
+               -e external_ip=<A.B.C.D> \
+               -v smartnode:/opt/smartcash -p 9678:9678 \
                zibastian/masternode-smartcash
+```
+
+---
+Watchdog
+---
+Add the following crontab:
+```sh
+*/30 * * * * docker run <CONTAINER_NAME> checkdaemon
 ```
 
 ---
@@ -31,7 +40,7 @@ docker logs -f <CONTAINER_NAME> [--tail 20]
 ---
 Donation
 ---
-If this image helps you reduce time to deploy, I like beer :)
+If this image helps you reduce time to deploy, I like beer :) 
 
 **SMART:** SVu4CZ8ufyv8zovqZe418mWUcjefJzpzVi  
 **EGEM:** 0x720752E61664a1B81B2ec9F7E709D0bCDB55502f  
